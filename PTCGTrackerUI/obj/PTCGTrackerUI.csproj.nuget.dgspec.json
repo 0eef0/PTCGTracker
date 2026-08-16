@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\PTCGTrackerUI.csproj": {}
+    "C:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\PTCGTrackerUI.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\PTCGTrackerUI.csproj": {
+    "C:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\PTCGTrackerUI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\PTCGTrackerUI.csproj",
+        "projectUniqueName": "C:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\PTCGTrackerUI.csproj",
         "projectName": "PTCGTrackerUI",
-        "projectPath": "c:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\PTCGTrackerUI.csproj",
+        "projectPath": "C:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\PTCGTrackerUI.csproj",
         "packagesPath": "C:\\Users\\ethan\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\obj\\",
+        "outputPath": "C:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ethan\\AppData\\Roaming\\NuGet\\NuGet.Config"
