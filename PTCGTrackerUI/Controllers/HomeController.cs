@@ -1,14 +1,23 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PTCGTrackerUI.Models;
 
 namespace PTCGTrackerUI.Controllers;
 
 public class HomeController : Controller
 {
-    public IActionResult Index()
+    private readonly AppDbContext _context;
+
+    public HomeController(AppDbContext context)
     {
-        return View();
+        _context = context;
+    }
+
+    public async Task<IActionResult> Index()
+    {
+        var decks = await _context.Decks.ToListAsync();
+        return View(decks);
     }
 
     public IActionResult Privacy()

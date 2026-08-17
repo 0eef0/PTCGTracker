@@ -1,4 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using PTCGTrackerUI.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Connect to DB
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connectionString));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

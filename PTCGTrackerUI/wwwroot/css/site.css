@@ -34,8 +34,11 @@ body {
 
 .DeckListCardInfo {
   display: none;
+  height: 0;
+  transition: height 0.4s linear;
 }
 
 .DeckListCard:hover .DeckListCardInfo {
   display: block;
+  height: auto;
 }
