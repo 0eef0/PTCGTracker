@@ -2,6 +2,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PTCGTrackerUI.Models;
+using PTCGTrackerUI.ViewModels;
 
 namespace PTCGTrackerUI.Controllers;
 
@@ -16,8 +17,17 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        var decks = await _context.Decks.ToListAsync();
-        return View(decks);
+        int currentDeck = 1;
+        var deck = await _context.Decks.SingleAsync(d => d.deckId == currentDeck);
+        var cards = await _context.DeckCards.Where(dc => dc.deckId == currentDeck).ToListAsync();
+
+        DeckListViewModel deckList = new DeckListViewModel
+        {
+            Deck = deck,
+            Cards = cards
+        };
+
+        return View(deckList);
     }
 
     public IActionResult Privacy()

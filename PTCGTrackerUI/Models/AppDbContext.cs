@@ -11,6 +11,7 @@ public class AppDbContext : IdentityDbContext
     }
 
     public DbSet<DeckModel> Decks { get; set; }
+    public DbSet<DeckCardModel> DeckCards { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -36,6 +37,40 @@ public class AppDbContext : IdentityDbContext
 
             entity.Property(d => d.losses)
                 .HasColumnName("d_losses");
+        });
+
+        modelBuilder.Entity<DeckCardModel>(entity =>
+        {
+            entity.ToTable("DeckCard");
+
+            entity.HasKey(c => c.cardId);
+
+            entity.Property(c => c.cardId)
+                .HasColumnName("dc_cardid"); 
+
+            entity.Property(c => c.deckId)
+                .HasColumnName("dc_deckid");
+
+            entity.Property(c => c.qtylist)
+                .HasColumnName("dc_qtylist");
+
+            entity.Property(c => c.qtydeck)
+                .HasColumnName("dc_qtydeck");
+
+            entity.Property(c => c.name)
+                .HasColumnName("dc_name");
+
+            entity.Property(c => c.set)
+                .HasColumnName("dc_set");
+
+            entity.Property(c => c.reg)
+                .HasColumnName("dc_reg");
+
+            entity.Property(c => c.type)
+                .HasColumnName("dc_type");
+
+            entity.Property(c => c.setNumber)
+                .HasColumnName("dc_setnumber");
         });
     }
 }

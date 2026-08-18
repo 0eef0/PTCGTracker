@@ -8,4 +8,13 @@ public class DeckModel
     public int wins { set; get; }
     public int losses { set; get; }
 
+    public void Deconstruct(out int DeckId, out int UserId, out string Name, out int Wins, out int Losses)
+    {
+        DeckId = deckId;
+        UserId = userId;
+        Name = name;
+        Wins = wins;
+        Losses = losses;
+    }
+
 }
