@@ -1,0 +1,28 @@
+Pokémon: 10
+4 Poltchageist PBL 5
+3 Dunsparce PRE 79
+4 Sinistcha PBL 6
+1 Shaymin DRI 10
+4 Banette PBL 34
+3 Dhelmise PBL 39
+3 Dudunsparce PRE 80
+4 Shuppet PBL 33
+1 Lillie's Clefairy ex JTG 56
+1 Spiritomb PBL 35
+
+Trainer: 9
+4 Ultra Ball SVI 196
+2 Boss's Orders ASC 183
+3 Lillie's Determination ASC 192
+3 Poké Pad POR 81
+1 Special Red Card CRI 82
+3 Night Stretcher SFA 61
+3 Prism Tower CRI 80
+1 Secret Box TWM 163
+4 Gwynn PBL 78
+
+Energy: 2
+4 Basic {P} Energy MEE 5
+4 Telepathic {P} Energy POR 88
+
+Total Cards: 60
