@@ -11,6 +11,11 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connect
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Add repository interfaces
+builder.Services.AddScoped<IDeckRepository, DeckRepository>();
+builder.Services.AddScoped<IDeckCardRepository, DeckCardRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

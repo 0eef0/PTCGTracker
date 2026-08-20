@@ -3,17 +3,60 @@
 @model UserDeckViewModel;
 @{
     ViewData["Title"] = "Home Page";
+
+    SetLookUp setLookUp = new SetLookUp();
 }
 
 <div class="">
-    <h1 class="display-6">Home</h1>
+    <h1 class="display-6">Top Decks</h1>
     <hr />
 
-    @foreach (var deck in Model.decks)
-    {
-        <a href="/Decks/Deck/@deck.deckId">
-            <h1>@deck.name - V@(deck.version)</h1>
-        </a>
-    }
+    <div class="d-flex gap-4 justify-content-between">
+        @for (int i = 0; i < 3; i++)
+        {
+            Console.WriteLine();
+            <a href="/Decks/Deck/@Model.topDecks[i].deckId"
+            class="border shadow rounded p-3"
+            style="flex: 1 1 0; min-width: 0;">
+                <div class="d-flex flex-column align-items-center w-100">
+                    <img src="https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/@(setLookUp.GetSetImageCode(Model.topDecks[i].thumbnailCard.set))/@(setLookUp.GetSetImageCode(Model.topDecks[i].thumbnailCard.set))_EN_@(Model.topDecks[i].thumbnailCard.setNumber).png"
+                        class="w-75" />
+
+                    <h2>@Model.topDecks[i].name - V@(Model.topDecks[i].version)</h2>
+
+                    <p>
+                        By: @Model.topDecks[i].owner.username
+                    </p>
+                </div>
+            </a>
+        }
+    </div>
+
+    <br />
+
+    <h1 class="display-6">Your Decks</h1>
+
+    <hr>
+
+    <div class="d-flex flex-wrap gap-4 justify-content-between">
+        @foreach (var deck in Model.decks) {
+            <a href="/Decks/Deck/@deck.deckId"
+            class="border shadow rounded p-3"
+            style="flex: 1 1 0; min-width: 0; height: 100%">
+                <div class="d-flex flex-column align-items-center w-100" style="height: 100%;">
+                    <img src="https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/@(setLookUp.GetSetImageCode(deck.thumbnailCard.set))/@(setLookUp.GetSetImageCode(deck.thumbnailCard.set))_EN_@(deck.thumbnailCard.setNumber).png"
+                        class="w-50" />
+
+                    <h3>@deck.name - V@(deck.version)</h3>
+
+                    <p>
+                        @(deck.losses > 0
+                            ? (Convert.ToDouble(deck.wins) / deck.losses).ToString("F2")
+                            : deck.wins.ToString("F2")) WL Ratio
+                    </p>
+                </div>
+            </a>
+        }
+    </div>
 
 </div>

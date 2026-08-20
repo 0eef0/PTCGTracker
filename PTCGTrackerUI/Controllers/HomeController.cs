@@ -8,24 +8,36 @@ namespace PTCGTrackerUI.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly AppDbContext _context;
+    private readonly IDeckRepository _deckRepository;
+    private readonly IUserRepository _userRepository;
+    private readonly IDeckCardRepository _deckCardRepository;
 
-    public HomeController(AppDbContext context)
+    public HomeController(IDeckRepository deckRepository, IUserRepository userRepository, IDeckCardRepository deckCardRepository)
     {
-        _context = context;
+        _deckRepository = deckRepository;
+        _userRepository = userRepository;
+        _deckCardRepository = deckCardRepository;
     }
 
     public async Task<IActionResult> Index()
     {
         string username = "eef_eef";
 
-        var user = await _context.AllUsers.SingleAsync(u => u.username == username);
-        var decks = await _context.Decks.Where(d => d.userId == user.id).ToListAsync();
+        var user = await _userRepository.GetUserByName(username);
+        var decks = await _deckRepository.GetAllDecksByUser(user.id);
+        var topDecks = await _deckRepository.GetAllDecksSorted();
+
+        foreach(var deck in topDecks)
+        {
+            deck.thumbnailCard = await _deckCardRepository.GetCardById(deck.thumbnailid);
+            deck.owner = await _userRepository.GetUserById(deck.userId);
+        }
 
         UserDeckViewModel userDeckViewModel = new UserDeckViewModel
         {
             user = user,
-            decks = decks
+            decks = decks,
+            topDecks = topDecks
         };
 
         return View(userDeckViewModel);

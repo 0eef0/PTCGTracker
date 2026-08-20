@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PTCGTrackerUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+718ebc4b43f44d04b339a703b531a2053938da89")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f830cb91dc8ed758d1473bef62ee39e5c7aa9c8a")]
 [assembly: System.Reflection.AssemblyProductAttribute("PTCGTrackerUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PTCGTrackerUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

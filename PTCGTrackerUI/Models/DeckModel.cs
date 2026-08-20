@@ -8,6 +8,9 @@ public class DeckModel
     public int wins { set; get; }
     public int losses { set; get; }
     public int version { set; get; }
+    public int thumbnailid { set; get; }
+    public DeckCardModel thumbnailCard { set; get; } = new();
+    public UserModel owner { set; get; } = new();
 
     public void Deconstruct(out int DeckId, out int UserId, out string Name, out int Wins, out int Losses, out int Version)
     {

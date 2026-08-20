@@ -41,6 +41,9 @@ public class AppDbContext : IdentityDbContext
 
             entity.Property(d => d.version)
                 .HasColumnName("d_version");
+
+            entity.Property(d => d.thumbnailid)
+                .HasColumnName("d_thumbnailid");
         });
 
         modelBuilder.Entity<DeckCardModel>(entity =>

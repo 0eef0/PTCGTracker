@@ -8,24 +8,23 @@ namespace PTCGTrackerUI.Controllers;
 
 public class DecksController : Controller
 {
-    private readonly AppDbContext _context;
+    private readonly IDeckRepository _deckRepository;
+    private readonly IDeckCardRepository _deckCardRepository;
+    private readonly IUserRepository _userRepository;
 
-    public DecksController(AppDbContext context)
+    public DecksController(IDeckRepository deckRepository, IDeckCardRepository deckCardRepository, IUserRepository userRepository)
     {
-        _context = context;
+        _deckRepository = deckRepository;
+        _deckCardRepository = deckCardRepository;
+        _userRepository = userRepository;
     }
 
     [HttpGet("/Decks/Deck/{id:int}")]
     public async Task<IActionResult> Deck(int id)
     {
-        var deck = await _context.Decks
-            .SingleAsync(d => d.deckId == id);
-
-        var cards = await _context.DeckCards
-            .Where(dc => dc.deckId == id)
-            .ToListAsync();
-        var user = await _context.AllUsers
-            .SingleAsync(u => u.id == deck.userId);
+        var deck = await _deckRepository.GetDeckById(id);
+        var cards = await _deckCardRepository.GetDeckListByUser(id);
+        var user = await _userRepository.GetUserById(deck.userId);
 
         var deckList = new DeckListViewModel
         {
@@ -40,11 +39,7 @@ public class DecksController : Controller
     [HttpPost("/Decks/Deck/{id:int}/win")]
     public async Task<IActionResult> DeckPostWin(int id)
     {
-        Console.WriteLine("Test");
-
-        var deck = await _context.Decks.SingleAsync(d => d.deckId == id);
-        deck.wins++;
-        _context.SaveChanges(); 
+        await _deckRepository.LogDeckWin(id);
 
         return Json(new
         {
@@ -56,11 +51,7 @@ public class DecksController : Controller
     [HttpPost("/Decks/Deck/{id:int}/loss")]
     public async Task<IActionResult> DeckPostLoss(int id)
     {
-        Console.WriteLine("Test");
-
-        var deck = await _context.Decks.SingleAsync(d => d.deckId == id);
-        deck.losses++;
-        _context.SaveChanges(); 
+        await _deckRepository.LogDeckLoss(id);
 
         return Json(new
         {

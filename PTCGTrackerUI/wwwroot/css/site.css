@@ -30,7 +30,10 @@ body {
   text-align: start;
 }
 
-
+a {
+  color: #212529;
+  text-decoration: none;
+}
 
 .DeckListCardInfo {
   display: none;
