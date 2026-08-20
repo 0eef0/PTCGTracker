@@ -1,0 +1,151 @@
+@using PTCGTrackerUI.ViewModels;
+@using PTCGTrackerUI.Models;
+@model DeckListViewModel;
+@{
+    (int deckId, int userId, string name, int wins, int losses, int version) = Model.Deck;
+
+    ViewData["Title"] = name;
+
+    SetLookUp setLookUp = new SetLookUp();
+
+    Dictionary<string, DeckSetModel> SetsUsed = new Dictionary<string, DeckSetModel>();
+
+    int testUserId = 8;
+}
+
+<div class="">
+    <div class="d-flex align-items-baseline gap-2">
+        <h1 class="display-6 mb-0">@name - V@(version)</h1>
+        <p class="mb-0">By: @Model.User.username</p>
+    </div>
+
+    <hr />
+
+    <div class="d-flex w-100 justify-content-around p-2 gap-4">
+
+        <div class="w-75 mw-75 shadow-sm border rounded p-2 DeckList d-flex flex-column">
+            <h4 class="p-2 w-100">List</h4>
+
+            <div class="d-flex gap-2 flex-wrap w-100 justify-content-start p-3 DeckListCards">
+                @foreach(var card in Model.Cards) {
+                    if(!SetsUsed.ContainsKey(card.set)) {
+                        SetsUsed[card.set] = new DeckSetModel(Reg: card.reg, Amt: card.qtylist);
+                    } else {
+                        SetsUsed[card.set].amt += card.qtylist;
+                    }
+
+                    <div style="width: 13.5%;" class="position-relative DeckListCard">
+                        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/@(setLookUp.GetSetImageCode(card.set))/@(setLookUp.GetSetImageCode(card.set))_EN_@(card.setNumber).png" class="w-100" />
+                        <div class="position-absolute bottom-0 end-0 bg-danger d-flex justify-content-center align-items-center" style="width: 50%; height: 30%; border-radius: 75% 0.25rem 0.25rem 0.25rem">
+                            <h4 class="p-0 m-0">@card.qtylist</h4>
+                        </div>
+                        <div class="position-absolute top-100 start-50 bg-white z-3 p-2 border shadow-lg rounded DeckListCardInfo" style="width: 250%">
+                            <h6>@card.name</h6>
+                            <table class="w-100">
+                                <tr>
+                                    <td>Set: @card.set</td>
+                                    <td>Regulation: @card.reg</td>
+                                </tr>
+                                <tr>
+                                    <td>Included in List</td>
+                                    <td>@card.qtylist</td>
+                                </tr>
+                                <tr>
+                                    <td>Included in IRL</td>
+                                    <td>@card.qtydeck</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="w-25 shadow-sm border rounded p-2 overflow-auto" style="max-height: 70vh;">
+            <h4 class="p-2">Deck Stats</h4>
+
+            <div class="d-flex flex-column justify-content-around gap-4">
+
+                <div class="text-center">
+                    <h1>@(losses > 0 ? (Convert.ToDouble(wins) / losses).ToString("F2") : wins.ToString("F2"))</h1>
+                    <h2>WL Ratio</h2>
+                </div>
+
+                <div class="d-flex flex-column align-items-center gap-1">
+
+                    <div class="text-center d-flex justify-content-around w-100">
+                        <div>
+                            <h3>@(wins > 0 ? wins : 0)</h3>
+                            <h4>Wins</h4>
+                        </div>
+                        <div>
+                            <h3>@(losses > 0 ? losses : 0)</h3>
+                            <h4>Losses</h4>
+                        </div>
+                    </div>
+
+                    @if(testUserId == userId) {
+                        <div class="text-center d-flex justify-content-around w-100">
+                            <div>
+                                <button class="btn bg-success p-2 border rounded-pill" id="LogWinBtn">Log Win</button>
+                            </div>
+                            <div>
+                                <button class="btn bg-danger p-2 border rounded-pill" id="LogLossBtn">Log Loss</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                
+                <div class="p-2">
+                    <h5>Sets Used</h5>
+
+                    <table class="table w-100">
+                        <thead>
+                            <tr>
+                                <th>Set</th>
+                                <th>Regulation</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-end">
+                            @foreach(var set in SetsUsed.OrderBy(set => set.Value.reg)) {
+                                <tr>
+                                    <td>@set.Key</td>
+                                    <td>@set.Value.reg</td>
+                                    <td>@set.Value.amt</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    document.getElementById("LogWinBtn").addEventListener("click", async () => {
+        const response = await fetch("/Decks/Deck/@Model.Deck.deckId/win", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        location.reload();
+    });
+
+    document.getElementById("LogLossBtn").addEventListener("click", async () => {
+        const response = await fetch("/Decks/Deck/@Model.Deck.deckId/loss", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        location.reload();
+    });
+</script>

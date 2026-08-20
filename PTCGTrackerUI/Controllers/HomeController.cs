@@ -17,17 +17,18 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        int currentDeck = 1;
-        var deck = await _context.Decks.SingleAsync(d => d.deckId == currentDeck);
-        var cards = await _context.DeckCards.Where(dc => dc.deckId == currentDeck).ToListAsync();
+        string username = "eef_eef";
 
-        DeckListViewModel deckList = new DeckListViewModel
+        var user = await _context.AllUsers.SingleAsync(u => u.username == username);
+        var decks = await _context.Decks.Where(d => d.userId == user.id).ToListAsync();
+
+        UserDeckViewModel userDeckViewModel = new UserDeckViewModel
         {
-            Deck = deck,
-            Cards = cards
+            user = user,
+            decks = decks
         };
 
-        return View(deckList);
+        return View(userDeckViewModel);
     }
 
     public IActionResult Privacy()

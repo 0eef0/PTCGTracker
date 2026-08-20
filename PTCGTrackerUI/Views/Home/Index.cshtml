@@ -1,145 +1,19 @@
 ﻿@using PTCGTrackerUI.ViewModels;
-@model DeckListViewModel;
+@using PTCGTrackerUI.Models;
+@model UserDeckViewModel;
 @{
     ViewData["Title"] = "Home Page";
-
-    (int deckId, int userId, string name, int wins, int losses) = Model.Deck;
-
-    Dictionary<string, string> setLookup = new Dictionary<string, string>{
-        { "SVI", "SV01" },
-        { "PAL", "SV02" },   
-        { "OBF", "SV03" },
-        { "MEW", "SV3PT5" },
-        { "PAR", "SV04" },
-        { "PAF", "SV4PT5" },
-        { "TEF", "SV05" },
-        { "TWM", "SV06" },   
-        { "SFA", "SV6PT5" },
-        { "SCR", "SV07" },
-        { "SSP", "SV08" },
-        { "PRE", "SV8PT5" },
-        { "JTG", "SV09" },
-        { "DRI", "SV10" },
-        { "BLK", "ZSV10PT5" },
-        { "WHT", "ZSV10PT5" },
-
-        { "MEE", "MEE"},
-        { "MEG", "ME01" },
-        { "PFL", "ME02" },   
-        { "ASC", "ME2PT5" },
-        { "POR", "ME03" },
-        { "CRI", "ME04" },
-        { "PBL", "ME05" },
-    };
-
-    Dictionary<string, DeckSetModel> SetsUsed = new Dictionary<string, DeckSetModel>();
 }
 
 <div class="">
-    <h1 class="display-6">@name - V1.0</h1>
+    <h1 class="display-6">Home</h1>
     <hr />
 
-    <div class="d-flex w-100 justify-content-around p-2 gap-4">
-
-        <div class="w-75 mw-75 shadow-sm border rounded p-2 DeckList d-flex flex-column">
-            <h4 class="p-2 w-100">List</h4>
-
-            <div class="d-flex gap-2 flex-wrap w-100 justify-content-start p-3 DeckListCards">
-                @foreach(var card in Model.Cards) {
-                    if(!SetsUsed.ContainsKey(card.set)) {
-                        SetsUsed[card.set] = new DeckSetModel(Reg: card.reg, Amt: card.qtylist);
-                    } else {
-                        SetsUsed[card.set].amt += card.qtylist;
-                    }
-
-                    <div style="width: 13.5%;" class="position-relative DeckListCard">
-                        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/@(setLookup[card.set])/@(setLookup[card.set])_EN_@(card.setNumber).png" class="w-100" />
-                        <div class="position-absolute bottom-0 end-0 bg-danger d-flex justify-content-center align-items-center" style="width: 50%; height: 30%; border-radius: 75% 0.25rem 0.25rem 0.25rem">
-                            <h4 class="p-0 m-0">@card.qtylist</h4>
-                        </div>
-                        <div class="position-absolute top-100 start-50 bg-white z-3 p-2 border shadow-lg rounded DeckListCardInfo" style="width: 250%">
-                            <h6>@card.name</h6>
-                            <table class="w-100">
-                                <tr>
-                                    <td>Set: @card.set</td>
-                                    <td>Regulation: @card.reg</td>
-                                </tr>
-                                <tr>
-                                    <td>Included in List</td>
-                                    <td>@card.qtylist</td>
-                                </tr>
-                                <tr>
-                                    <td>Included in IRL</td>
-                                    <td>@card.qtydeck</td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-
-        <div class="w-25 shadow-sm border rounded p-2 overflow-auto" style="max-height: 70vh;">
-            <h4 class="p-2">Deck Stats</h4>
-
-            <div class="d-flex flex-column justify-content-around gap-4">
-
-                <div class="text-center">
-                    <h1>@(losses > 0 ? (wins / losses).ToString("F2") : 0)</h1>
-                    <h2>WL Ratio</h2>
-                </div>
-
-                <div class="d-flex flex-column align-items-center gap-1">
-
-                    <div class="text-center d-flex justify-content-around w-100">
-                        <div>
-                            <h3>@(wins > 0 ? wins : 0)</h3>
-                            <h4>Wins</h4>
-                        </div>
-                        <div>
-                            <h3>@(losses > 0 ? losses : 0)</h3>
-                            <h4>Losses</h4>
-                        </div>
-                    </div>
-
-                    <div class="text-center d-flex justify-content-around w-100">
-                        <div>
-                            <button class="btn bg-success p-2 border rounded-pill">Log Win</button>
-                        </div>
-                        <div>
-                            <button class="btn bg-danger p-2 border rounded-pill">Log Loss</button>
-                        </div>
-                    </div>
-
-                    <button class="btn p-2 border rounded-pill w-50 m-2">Save Records</button>
-                </div>
-
-                
-                <div class="p-2">
-                    <h5>Sets Used</h5>
-
-                    <table class="table w-100">
-                        <thead>
-                            <tr>
-                                <th>Set</th>
-                                <th>Regulation</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody class="text-end">
-                            @foreach(var set in SetsUsed.Keys) {
-                                <tr>
-                                    <td>@set</td>
-                                    <td>@SetsUsed[set].reg</td>
-                                    <td>@SetsUsed[set].amt</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </div>
+    @foreach (var deck in Model.decks)
+    {
+        <a href="/Decks/Deck/@deck.deckId">
+            <h1>@deck.name - V@(deck.version)</h1>
+        </a>
+    }
 
 </div>

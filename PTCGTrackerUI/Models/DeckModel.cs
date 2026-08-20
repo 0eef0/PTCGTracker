@@ -7,14 +7,16 @@ public class DeckModel
     public string name { set; get; } = "";
     public int wins { set; get; }
     public int losses { set; get; }
+    public int version { set; get; }
 
-    public void Deconstruct(out int DeckId, out int UserId, out string Name, out int Wins, out int Losses)
+    public void Deconstruct(out int DeckId, out int UserId, out string Name, out int Wins, out int Losses, out int Version)
     {
         DeckId = deckId;
         UserId = userId;
         Name = name;
         Wins = wins;
         Losses = losses;
+        Version = version;
     }
 
 }
