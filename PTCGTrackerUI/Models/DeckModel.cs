@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace PTCGTrackerUI.Models;
 
 public class DeckModel
@@ -9,7 +11,10 @@ public class DeckModel
     public int losses { set; get; }
     public int version { set; get; }
     public int thumbnailid { set; get; }
+
+    [NotMapped]
     public DeckCardModel thumbnailCard { set; get; } = new();
+    [NotMapped]
     public UserModel owner { set; get; } = new();
 
     public void Deconstruct(out int DeckId, out int UserId, out string Name, out int Wins, out int Losses, out int Version)

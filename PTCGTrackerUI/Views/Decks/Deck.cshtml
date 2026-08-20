@@ -62,44 +62,52 @@
         </div>
 
         <div class="w-25 shadow-sm border rounded p-2 overflow-auto" style="max-height: 70vh;">
-            <h4 class="p-2">Deck Stats</h4>
+            <h4 class="p-2 w-100">Stats</h4>
+
+            <select class="form-select form-select-lg" id="StatSelector">
+                <option value="WinLoss" selected>Wins/Losses</option>
+                <option value="SetsUsed">Sets Used</option>
+            </select>
 
             <div class="d-flex flex-column justify-content-around gap-4">
 
-                <div class="text-center">
-                    <h1>@(losses > 0 ? (Convert.ToDouble(wins) / losses).ToString("F2") : wins.ToString("F2"))</h1>
-                    <h2>WL Ratio</h2>
-                </div>
+                <div id="WinLoss" class="StatDisplay">
+                    <br />
 
-                <div class="d-flex flex-column align-items-center gap-1">
-
-                    <div class="text-center d-flex justify-content-around w-100">
-                        <div>
-                            <h3>@(wins > 0 ? wins : 0)</h3>
-                            <h4>Wins</h4>
-                        </div>
-                        <div>
-                            <h3>@(losses > 0 ? losses : 0)</h3>
-                            <h4>Losses</h4>
-                        </div>
+                    <div class="text-center">
+                        <h1>@(losses > 0 ? (Convert.ToDouble(wins) / losses).ToString("F2") : wins.ToString("F2"))</h1>
+                        <h2>WL Ratio</h2>
                     </div>
 
-                    @if(testUserId == userId) {
+                    <div class="d-flex flex-column align-items-center gap-1">
+
                         <div class="text-center d-flex justify-content-around w-100">
                             <div>
-                                <button class="btn bg-success p-2 border rounded-pill" id="LogWinBtn">Log Win</button>
+                                <h3>@(wins > 0 ? wins : 0)</h3>
+                                <h4>Wins</h4>
                             </div>
                             <div>
-                                <button class="btn bg-danger p-2 border rounded-pill" id="LogLossBtn">Log Loss</button>
+                                <h3>@(losses > 0 ? losses : 0)</h3>
+                                <h4>Losses</h4>
                             </div>
                         </div>
-                    }
+
+                        @if(testUserId == userId) {
+                            <div class="text-center d-flex justify-content-around w-100">
+                                <div>
+                                    <button class="btn bg-success p-2 border rounded-pill" id="LogWinBtn">Log Win</button>
+                                </div>
+                                <div>
+                                    <button class="btn bg-danger p-2 border rounded-pill" id="LogLossBtn">Log Loss</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
                 </div>
 
                 
-                <div class="p-2">
-                    <h5>Sets Used</h5>
-
+                <div class="p-2 StatDisplay" id="SetsUsed" style="display: none;">
                     <table class="table w-100">
                         <thead>
                             <tr>
@@ -126,26 +134,39 @@
 
 </div>
 
+
+@if(testUserId == userId) {
+    <script>
+        document.getElementById("LogWinBtn").addEventListener("click", async () => {
+            const response = await fetch("/Decks/Deck/@Model.Deck.deckId/win", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            location.reload();
+        });
+
+        document.getElementById("LogLossBtn").addEventListener("click", async () => {
+            const response = await fetch("/Decks/Deck/@Model.Deck.deckId/loss", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            location.reload();
+        });
+    </script>
+}
+
 <script>
-    document.getElementById("LogWinBtn").addEventListener("click", async () => {
-        const response = await fetch("/Decks/Deck/@Model.Deck.deckId/win", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        location.reload();
-    });
-
-    document.getElementById("LogLossBtn").addEventListener("click", async () => {
-        const response = await fetch("/Decks/Deck/@Model.Deck.deckId/loss", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-
-        location.reload();
+    document.getElementById("StatSelector").addEventListener("change", () => {
+        let StatDisplays = document.getElementsByClassName("StatDisplay");
+        for(var display of StatDisplays) {
+            display.style.display = "none";
+        }
+        document.getElementById(document.getElementById("StatSelector").value).style.display = "block";
     });
 </script>

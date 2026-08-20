@@ -95,7 +95,6 @@ c:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\
 c:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\PTCGTrackerUI.pdb
 c:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\PTCGTrackerUI.genruntimeconfig.cache
 c:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\ref\PTCGTrackerUI.dll
-C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\compressed\zi87tc12fd-{0}-lv9elirqkw-lv9elirqkw.gz
 C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\bin\Debug\net10.0\dotenv.net.dll
 C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\bin\Debug\net10.0\Supabase.Functions.dll
 C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\bin\Debug\net10.0\Supabase.Gotrue.dll
@@ -268,3 +267,4 @@ C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\
 C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\compressed\v0zgfp0y55-{0}-87fc7y1x7t-87fc7y1x7t.gz
 C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\compressed\yfc7ypekbg-{0}-mlv21k5csn-mlv21k5csn.gz
 C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\PTCGTrac.AD73E95F.Up2Date
+C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\compressed\zi87tc12fd-{0}-ig7nlrr4o0-ig7nlrr4o0.gz
