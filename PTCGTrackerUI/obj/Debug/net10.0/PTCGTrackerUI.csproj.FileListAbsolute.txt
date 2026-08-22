@@ -268,3 +268,4 @@ C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\
 C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\compressed\yfc7ypekbg-{0}-mlv21k5csn-mlv21k5csn.gz
 C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\PTCGTrac.AD73E95F.Up2Date
 C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\obj\Debug\net10.0\compressed\zi87tc12fd-{0}-ig7nlrr4o0-ig7nlrr4o0.gz
+C:\Users\ethan\Documents\SideProjects\PTCGTracker\PTCGTracker\PTCGTrackerUI\bin\Debug\net10.0\AspNet.Security.OAuth.Discord.dll

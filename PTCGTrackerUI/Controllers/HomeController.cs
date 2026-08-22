@@ -21,10 +21,22 @@ public class HomeController : Controller
 
     public async Task<IActionResult> Index()
     {
-        string username = "eef_eef";
+        UserModel user;
+        List<DeckModel> decks;
+        bool isLoggedIn = false;
 
-        var user = await _userRepository.GetUserByName(username);
-        var decks = await _deckRepository.GetAllDecksByUser(user.id);
+        if(User.Identity?.IsAuthenticated == true)
+        {
+            user = await _userRepository.GetUserByName(User.Identity?.Name);
+            decks = await _deckRepository.GetAllDecksByUser(user.id);
+            isLoggedIn = true;
+        } else
+        {
+            user = new();
+            decks = new();
+        }
+
+
         var topDecks = await _deckRepository.GetAllDecksSorted();
 
         foreach(var deck in topDecks)
@@ -37,7 +49,8 @@ public class HomeController : Controller
         {
             user = user,
             decks = decks,
-            topDecks = topDecks
+            topDecks = topDecks,
+            isLoggedIn = isLoggedIn
         };
 
         return View(userDeckViewModel);

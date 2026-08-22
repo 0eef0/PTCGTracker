@@ -92,7 +92,7 @@
                             </div>
                         </div>
 
-                        @if(testUserId == userId) {
+                        @if(Model.User.username == User.Identity?.Name) {
                             <div class="text-center d-flex justify-content-around w-100">
                                 <div>
                                     <button class="btn bg-success p-2 border rounded-pill" id="LogWinBtn">Log Win</button>
@@ -135,7 +135,7 @@
 </div>
 
 
-@if(testUserId == userId) {
+@if(Model.User.username == User.Identity?.Name) {
     <script>
         document.getElementById("LogWinBtn").addEventListener("click", async () => {
             const response = await fetch("/Decks/Deck/@Model.Deck.deckId/win", {

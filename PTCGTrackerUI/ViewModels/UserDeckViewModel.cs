@@ -7,4 +7,5 @@ public class UserDeckViewModel
     public UserModel user { get; set; } = new();
     public List<DeckModel> decks { get; set; } = new();
     public List<DeckModel> topDecks { get; set; } = new();
+    public bool isLoggedIn { get; set; } = false;
 }

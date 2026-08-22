@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "T2Nl5t3Dq1w=",
+  "dgSpecHash": "kcHBMaJ8GEA=",
   "success": true,
   "projectFilePath": "C:\\Users\\ethan\\Documents\\SideProjects\\PTCGTracker\\PTCGTracker\\PTCGTrackerUI\\PTCGTrackerUI.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ethan\\.nuget\\packages\\aspnet.security.oauth.discord\\10.0.0\\aspnet.security.oauth.discord.10.0.0.nupkg.sha512",
     "C:\\Users\\ethan\\.nuget\\packages\\dotenv.net\\4.0.2\\dotenv.net.4.0.2.nupkg.sha512",
     "C:\\Users\\ethan\\.nuget\\packages\\functions-csharp\\1.3.2\\functions-csharp.1.3.2.nupkg.sha512",
     "C:\\Users\\ethan\\.nuget\\packages\\gotrue-csharp\\4.2.7\\gotrue-csharp.4.2.7.nupkg.sha512",

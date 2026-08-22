@@ -1,6 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using PTCGTrackerUI.Models;
 
+using AspNet.Security.OAuth.Discord;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Connect to DB
@@ -16,6 +22,28 @@ builder.Services.AddScoped<IDeckRepository, DeckRepository>();
 builder.Services.AddScoped<IDeckCardRepository, DeckCardRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = "Discord";
+})
+.AddCookie()
+.AddDiscord(options =>
+{
+    options.ClientId =
+        builder.Configuration["Authentication:Discord:ClientId"]!;
+
+    options.ClientSecret =
+        builder.Configuration["Authentication:Discord:ClientSecret"]!;
+
+    options.ClaimActions.MapJsonKey(
+        ClaimTypes.Name,
+        "username");
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +57,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapStaticAssets();

@@ -11,10 +11,11 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("76b451ac-dc38-4e32-911f-26df4f16884b")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("PTCGTrackerUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df7df54f6185db0958862bb3ae6ae054047028da")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+db3136fed462f73c4b26d34e804f0c17aca2848b")]
 [assembly: System.Reflection.AssemblyProductAttribute("PTCGTrackerUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PTCGTrackerUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

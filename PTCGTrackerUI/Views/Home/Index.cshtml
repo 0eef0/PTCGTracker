@@ -34,29 +34,32 @@
 
     <br />
 
-    <h1 class="display-6">Your Decks</h1>
+    @if(Model.isLoggedIn) {
 
-    <hr>
+        <h1 class="display-6">Your Decks</h1>
 
-    <div class="d-flex flex-wrap gap-4 justify-content-around">
-        @foreach (var deck in Model.decks) {
-            <a href="/Decks/Deck/@deck.deckId"
-            class="border shadow rounded p-3"
-            style="min-width: 18rem; width: 20%; height: 100%">
-                <div class="d-flex flex-column align-items-center w-100" style="height: 100%;">
-                    <img src="https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/@(setLookUp.GetSetImageCode(deck.thumbnailCard.set))/@(setLookUp.GetSetImageCode(deck.thumbnailCard.set))_EN_@(deck.thumbnailCard.setNumber).png"
-                        class="w-50" />
+        <hr>
 
-                    <h3>@(deck.name.Length < 12 ? deck.name : deck.name.Substring(0,12) + "...") - V@(deck.version)</h3>
+        <div class="d-flex flex-wrap gap-4 justify-content-around">
+            @foreach (var deck in Model.decks) {
+                <a href="/Decks/Deck/@deck.deckId"
+                class="border shadow rounded p-3"
+                style="min-width: 18rem; width: 20%; height: 100%">
+                    <div class="d-flex flex-column align-items-center w-100" style="height: 100%;">
+                        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2/img/cards/web/@(setLookUp.GetSetImageCode(deck.thumbnailCard.set))/@(setLookUp.GetSetImageCode(deck.thumbnailCard.set))_EN_@(deck.thumbnailCard.setNumber).png"
+                            class="w-50" />
 
-                    <p>
-                        @(deck.losses > 0
-                            ? (Convert.ToDouble(deck.wins) / deck.losses).ToString("F2")
-                            : deck.wins.ToString("F2")) WL Ratio
-                    </p>
-                </div>
-            </a>
-        }
-    </div>
+                        <h3>@(deck.name.Length < 12 ? deck.name : deck.name.Substring(0,12) + "...") - V@(deck.version)</h3>
+
+                        <p>
+                            @(deck.losses > 0
+                                ? (Convert.ToDouble(deck.wins) / deck.losses).ToString("F2")
+                                : deck.wins.ToString("F2")) WL Ratio
+                        </p>
+                    </div>
+                </a>
+            }
+        </div>
+    }
 
 </div>
